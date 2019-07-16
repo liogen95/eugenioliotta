@@ -3,6 +3,7 @@
 <title>Eugenio Liotta</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href=https://www.eugenioliotta.com/faviconeugenio.ico rel="shortcut icon" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <style>
@@ -18,6 +19,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CHIUDI</a>
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">PORTFOLIO</a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">INFO</a> 
+  <a href="#podcast" onclick="w3_close()" class="w3-bar-item w3-button">PODCAST</a>
   <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTATTI</a>
   <a href="#social" onclick="w3_close()" class="w3-bar-item w3-button">SOCIAL</a>
 </nav>
@@ -88,14 +90,34 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       
     </div>
   </div>
+  
+   <!-- Podcast section -->
+  <div class="w3-container w3-grey w3-center w3-text-light-grey w3-padding-32" id="podcast">
+    <h4><b>Podcast</b></h4>
+    <div class="w3-content w3-justify" style="max-width:600px">
+     <iframe class="W3-center" src="https://anchor.fm/eugenio-liotta/embed" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+      <p>Segui il podcast nella tua piattaforma preferita.
+      </p>
+     
+      <div class="w3-center" >
+  <a class="w3-button w3-black w3-center w3-section"  href="https://open.spotify.com/show/09pYE8a8w28idTJ17cIj1T" Target=_blank >Spotify</a> 
+<a class="w3-button w3-black w3-center w3-section" href="https://podcasts.apple.com/us/podcast/il-caff%C3%A8-podcast/id1462201338?uo=4" Target=_blank >Apple podcast</a>
+<a class="w3-button w3-black w3-center w3-section" href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy9hZmRjMWUwL3BvZGNhc3QvcnNz" Target=_blank >Google podcast</a> 
+ <a class="w3-button w3-black w3-center w3-section" href="https://overcast.fm/itunes1462201338/il-caff-podcast" Target=_blank >Overcast</a> 
+  <a class="w3-button w3-black w3-center w3-section" href="https://anchor.fm/eugenio-liotta" Target=_blank >Anchor</a> 
+      </div>
+      
+    </div>
+  </div>
+
 
   <!-- Contact section -->
   <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="contact">
     <div class="w3-content" style="max-width:600px">
       <h4 class="w3-center"><b>Contattami</b></h4>
       <p>Per qualsiasi idea o suggerimento mandami un messaggio!</p>
-       <form action="https://formspree.io/info@liogen.it" method="post" />
-        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+       <form action="https://formsubmit.co/me@eugenioliotta.com" method="post" />
+          <input type="hidden" name="_captcha" value="false">        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
           <div class="w3-half">
             <input class="w3-input w3-border" type="text" placeholder="Nome" required name="Name">
           </div>
@@ -145,7 +167,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
 }
-
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
@@ -153,7 +174,6 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
-
 </script>
 
 
