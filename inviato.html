@@ -1,76 +1,54 @@
-<!DOCTYPE html>
-<html lang="it">
-<title>Eugenio Liotta</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
- <link href=https://www.eugenioliotta.com/faviconeugenio.ico rel="shortcut icon" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-.w3-third img{margin-bottom: -6px; opacity: 0.8; cursor: pointer}
-.w3-third img:hover{opacity: 1}
-</style>
-<body class="w3-light-grey w3-content" style="max-width:1600px">
+<!DOCTYPE HTML>
+<!--
+	Identity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Eugenio Liotta</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href=https://www.eugenioliotta.com/faviconeugenio.ico rel="shortcut icon" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+	</head>
+	<body class="is-preload">
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
-  <h3 href="https://www.eugenioliotta.com/#" class="w3-padding-64 w3-center"><b>Eugenio<br>Liotta</b></h3>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CHIUDI</a>
-  <a href="https://www.eugenioliotta.com/#" onclick="w3_close()" class="w3-bar-item w3-button">PORTFOLIO</a> 
-  <a href="https://www.eugenioliotta.com/#about" onclick="w3_close()" class="w3-bar-item w3-button">INFO</a> 
-  <a href="https://www.eugenioliotta.com/#podcast" onclick="w3_close()" class="w3-bar-item w3-button">PODCAST</a>
-  <a href="https://www.eugenioliotta.com/#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTATTI</a>
-  <a href="https://www.eugenioliotta.com/#social" onclick="w3_close()" class="w3-bar-item w3-button">SOCIAL</a>
-</nav>
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
-  <span class="w3-left w3-padding">Eugenio Liotta</span>
-  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
-</header>
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<h1>Messaggio Inviato</h1>
+							<p>grazie per avermi inviato un messaggio</p>
+						</header>
+      <footer>
+							<p>
+								<a href="https://www.eugenioliotta.com/" >Torna alla home</a>
+							</p>
+							
+						</footer>
+					</section>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; Eugenio Liotta </li><li>sito in beta</li><li> Design <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
+			</div>
 
-  <!-- Push down content on small screens --> 
-  <div class="w3-hide-large" style="margin-top:83px"></div>
- 
- <!-- Contact section -->
-  <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="inviato">
-    <div class="w3-content" style="max-width:600px">
-      <h4 class="w3-center"><b>Messaggio inviato correttamente.</b></h4>
-      <p>Grazie per avermi mandato un messaggio, di solito rispondo entro qualche ora!</p>
-     <a class="w3-button w3-black w3-right w3-section"  href="https://www.eugenioliotta.com" >INDIETRO</a>
-   </div>
-  </div>
- 
- <!-- End page content -->
-</div>
+		<!-- Scripts -->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
-</script>
-
-
-</body>
+	</body>
 </html>
