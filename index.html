@@ -1,64 +1,101 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; URL='https://bento.me/eugenioliotta'" />
-  <title>Eugenio Liotta</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="0; URL='bio.html'" />
+    <title>Eugenio Liotta</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #CBBFBB 0%, #A0B2A6 100%);
+            min-height: 100vh;
+        }
+        .link-card {
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+        .link-card:hover {
+            transform: scale(1.02);
+        }
+        .profile-image {
+            border: 4px solid black;
+        }
+        .custom-navbar {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+        }
+        .navbar-menu.is-active {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .custom-footer {
+            background-color: #273E47;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .content-section {
+            padding: 2rem;
+        }
+        .card-image img {
+            object-fit: cover;
+            height: 200px;
+        }
+        .navbar-brand img {
+            max-height: 50px;
+        }
+        .brand-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+        }
+        .text-post {
+            background-color: white;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .text-post-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .text-post-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .text-post-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .text-post-link {
+            font-size: 0.9rem;
+            color: #273E47;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
+    
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Ma ciao!</h4>
-        <p>Sono <strong>Eugenio</strong> e questo è il mio piccolo spazio online.</p>
-        <p>Si, lo so, fa molto loft.</p>
-        <p>Per adesso va bene cosi.</p>
-         <p>🗣️ Divagatore compulsivo</p>
-        <p>☕ Consumatore di caffè</p>
-        <p>🎨 Sempre in cerca di soluzioni comunicative</p>
-        <p>🌍 Catania / Buenos Aires</p>
-        </div>
-       <div class="one-half column" style="margin-top: 25%">
-        <h5>Già che sei qui possiamo rimanere in contatto così:</h5>
-        <p><a class="button button-primary" href="https://eugenioliotta.notion.site/0df41c9feedd492085e270277937b056?v=03c98c8ec0254a38a7e6cfda640c04a4">Dai un'occhio alla mia lista di risorse utili</a></p>
-        <p><a class="button button-primary" href="https://anchor.fm/eugenio-liotta">Ascolta il mio podcast</a></p>
-        <p><a class="button button-primary" href="https://www.instagram.com/liogen95/">Seguimi su instagram</a></p>
-        <p><a class="button" href="mailto:email@eugenioliotta.com">Mandami una email</a></p>
-        <p><a class="button" href="https://cal.com/liogen/videochiamata-veloce">Organizza un appuntamento</a></p>
-      </div>
-
-    </div>
-  </div>
-  
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Funzionalità per il menu hamburger
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
