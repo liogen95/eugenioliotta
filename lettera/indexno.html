@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulatore Tracciamento Posta4</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #f5f7fa; min-height: 100vh; }
+    .timeline-item {
+      padding: 1.25rem;
+      border-left: 3px solid #dbdbdb;
+      position: relative;
+      margin-left: 1rem;
+      background-color: #fff;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .timeline-item.is-active { border-left-color: #3298dc; background-color: #f0f8ff; }
+    .timeline-item.is-completed { border-left-color: #48c78e; }
+    .timeline-marker {
+      position: absolute; left: -0.85rem; top: 1.25rem;
+      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      background: #dbdbdb; display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 0.75rem;
+    }
+    .is-active .timeline-marker { background: #3298dc; }
+    .is-completed .timeline-marker { background: #48c78e; }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container" style="max-width: 650px;">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <span class="icon is-large has-text-link">
+                <i class="fas fa-envelope-open-text fa-2x"></i>
+              </span>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Tracking Simulato Posta4</p>
+              <p class="subtitle is-6 has-text-grey">Spedizione stimata in 4 giorni lavorativi</p>
+            </div>
+          </div>
+
+          <!-- Sezione Generazione Link (Visibile a chi crea l'invio) -->
+          <div id="startContainer" class="has-text-centered my-5">
+            <p class="mb-3">Premi il pulsante quando imbuchi la lettera per generare il link di tracciamento da inviare al destinatario:</p>
+            <button id="btnShip" class="button is-link is-medium is-fullwidth is-rounded">
+              <span class="icon"><i class="fas fa-paper-plane"></i></span>
+              <span>Genera Link di Tracciamento Ora</span>
+            </button>
+          </div>
+
+          <!-- Box con il link da condividere -->
+          <div id="shareBox" class="notification is-success is-light is-hidden">
+            <p class="has-text-weight-bold mb-2">Link di tracciamento generato!</p>
+            <p class="is-size-7 mb-3">Invia questo link al tuo amico:</p>
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <input id="shareUrlInput" class="input is-small" type="text" readonly>
+              </div>
+              <div class="control">
+                <button id="btnCopy" class="button is-small is-success">Copia</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Tracking -->
+          <div id="trackingContainer" class="is-hidden">
+            <div class="box has-background-white-ter">
+              <div class="level is-mobile mb-2">
+                <div class="level-left"><span class="heading mb-0">Progresso stimato</span></div>
+                <div class="level-right"><span id="percentageText" class="tag is-info font-weight-bold">0%</span></div>
+              </div>
+              <progress id="progressBar" class="progress is-link" value="0" max="100">0%</progress>
+              <p class="is-size-7 has-text-grey">Data imbucamento: <strong id="dispatchTimeText">-</strong></p>
+            </div>
+
+            <!-- Timeline -->
+            <div id="timeline" class="mt-5">
+              <div class="timeline-item" id="step-0">
+                <div class="timeline-marker"><i class="fas fa-box"></i></div>
+                <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                  <span class="title is-6 mb-0">1. Imbucamento / Accettazione</span>
+                  <span class="tag is-rounded step-pill">In attesa</span>
+                </div>
+                <p class="is-size-7 has-text-grey step-time">-</p>
+                <p class="is-size-6">La lettera è stata inserita nella cassetta postale e presa in carico.</p>
+              </div>
+
+              <div class="timeline-item" id="step-1">
+                <div class="timeline-marker"><i class="fas fa-cogs"></i></div>
+                <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                  <span class="title is-6 mb-0">2. Smistamento Meccanizzato</span>
+                  <span class="tag is-rounded step-pill">In attesa</span>
+                </div>
+                <p class="is-size-7 has-text-grey step-time">-</p>
+                <p class="is-size-6">In lavorazione presso il Centro di Meccanizzazione Postale (CMP).</p>
+              </div>
+
+              <div class="timeline-item" id="step-2">
+                <div class="timeline-marker"><i class="fas fa-truck"></i></div>
+                <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                  <span class="title is-6 mb-0">3. In Trasferimento</span>
+                  <span class="tag is-rounded step-pill">In attesa</span>
+                </div>
+                <p class="is-size-7 has-text-grey step-time">-</p>
+                <p class="is-size-6">In viaggio verso il Centro Operativo di Distribuzione locale.</p>
+              </div>
+
+              <div class="timeline-item" id="step-3">
+                <div class="timeline-marker"><i class="fas fa-motorcycle"></i></div>
+                <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                  <span class="title is-6 mb-0">4. In Consegna</span>
+                  <span class="tag is-rounded step-pill">In attesa</span>
+                </div>
+                <p class="is-size-7 has-text-grey step-time">-</p>
+                <p class="is-size-6">In carico al portalettere per il recapito.</p>
+              </div>
+
+              <div class="timeline-item" id="step-4">
+                <div class="timeline-marker"><i class="fas fa-check"></i></div>
+                <div class="is-flex is-justify-content-space-between is-align-items-center mb-1">
+                  <span class="title is-6 mb-0">5. Consegna stimata</span>
+                  <span class="tag is-rounded step-pill">In attesa</span>
+                </div>
+                <p class="is-size-7 has-text-grey step-time">-</p>
+                <p class="is-size-6">Consegna prevista entro il termine dei 4 giorni lavorativi.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function addBusinessDays(startDate, days) {
+      let currentDate = new Date(startDate.getTime());
+      let addedDays = 0;
+      while (addedDays < days) {
+        currentDate.setDate(currentDate.getDate() + 1);
+        if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
+          addedDays++;
+        }
+      }
+      return currentDate;
+    }
+
+    function formatDate(date) {
+      return date.toLocaleString('it-IT', { 
+        weekday: 'short', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' 
+      });
+    }
+
+    function updateTracking(dispatchTimestamp) {
+      document.getElementById('startContainer').classList.add('is-hidden');
+      document.getElementById('trackingContainer').classList.remove('is-hidden');
+
+      const dispatchDate = new Date(dispatchTimestamp);
+      document.getElementById('dispatchTimeText').innerText = formatDate(dispatchDate);
+
+      const stepDates = [
+        dispatchDate,
+        addBusinessDays(dispatchDate, 1),
+        addBusinessDays(dispatchDate, 2),
+        addBusinessDays(dispatchDate, 3),
+        addBusinessDays(dispatchDate, 4)
+      ];
+
+      const now = new Date();
+      const totalDuration = stepDates[4].getTime() - dispatchDate.getTime();
+      const elapsed = now.getTime() - dispatchDate.getTime();
+      
+      let progressPct = Math.min(100, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
+      document.getElementById('progressBar').value = progressPct;
+      document.getElementById('percentageText').innerText = progressPct + '%';
+
+      stepDates.forEach((targetDate, index) => {
+        const stepEl = document.getElementById(`step-${index}`);
+        const pillEl = stepEl.querySelector('.step-pill');
+        const timeEl = stepEl.querySelector('.step-time');
+
+        timeEl.innerText = (index === 0 ? 'Inviata: ' : 'Previsto: ') + formatDate(targetDate);
+        stepEl.classList.remove('is-active', 'is-completed');
+
+        if (now >= targetDate) {
+          stepEl.classList.add('is-completed');
+          pillEl.className = 'tag is-rounded step-pill is-success';
+          pillEl.innerText = 'Completato';
+        } else if (index > 0 && now >= stepDates[index - 1] && now < targetDate) {
+          stepEl.classList.add('is-active');
+          pillEl.className = 'tag is-rounded step-pill is-info';
+          pillEl.innerText = 'In corso';
+        } else {
+          pillEl.className = 'tag is-rounded step-pill is-light';
+          pillEl.innerText = 'In attesa';
+        }
+      });
+    }
+
+    // Controlla se c'è un parametro ?t= nella URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const timestampFromUrl = urlParams.get('t');
+
+    if (timestampFromUrl) {
+      // Se c'è la data nell'URL, mostra subito il tracciamento
+      updateTracking(parseInt(timestampFromUrl));
+      setInterval(() => updateTracking(parseInt(timestampFromUrl)), 60000);
+    }
+
+    // Gestione click pulsante "Genera Link"
+    document.getElementById('btnShip').addEventListener('click', () => {
+      const now = Date.now();
+      const trackingUrl = window.location.origin + window.location.pathname + '?t=' + now;
+      
+      document.getElementById('shareUrlInput').value = trackingUrl;
+      document.getElementById('shareBox').classList.remove('is-hidden');
+      
+      updateTracking(now);
+    });
+
+    // Pulsante per copiare il link
+    document.getElementById('btnCopy').addEventListener('click', () => {
+      const copyText = document.getElementById('shareUrlInput');
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert('Link copiato! Invialo al tuo amico.');
+    });
+  </script>
+</body>
+</html>
